@@ -173,6 +173,13 @@ pre_build.commands = [
     "${config}",
     "${precache_flag_0}",
   ],
+  # Ensure the precached isaacsim.util.debug_draw package has the static lib
+  # libisaacsim.util.debug_draw.primitive_drawing.a (the 107.3.3 registry build
+  # omits it, breaking the omap/sensors.physx C++ link). Runs after precache,
+  # before the build; no-op when the .a is already present.
+  [
+    "${root}/tools/patches/inject_debug_draw_lib.sh",
+  ],
 ]
 
 [[repo_build.argument]]
