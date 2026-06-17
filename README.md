@@ -5,7 +5,6 @@
 
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://docs.python.org/3/whatsnew/3.11.html)
 [![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/22.04/)
-[![Windows platform](https://img.shields.io/badge/platform-windows--64-orange.svg)](https://www.microsoft.com/en-us/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-yellow.svg)](https://opensource.org/license/apache-2-0)
 
 NVIDIA Isaac Sim™ is a simulation platform built on NVIDIA Omniverse, designed to develop, test, train, and deploy AI-powered robots in realistic virtual environments. It supports importing robotic systems from common formats such as URDF, MJCF, and CAD. The simulator leverages high-fidelity, GPU-accelerated physics engines to simulate accurate dynamics and support multi-sensor RTX rendering at scale. It comes equipped with end-to-end workflows including synthetic data generation, reinforcement learning, ROS integration, and digital twin simulation. Isaac Sim provides the infrastructure needed to support robotics development at any stage.
@@ -36,9 +35,9 @@ Follow these links to get started:
 
 Ensure your system is set up with the following before building Isaac Sim:
 
-- **Operating System**: Windows 10/11 or Linux (Ubuntu 22.04)
+- **Operating System**: Linux (Ubuntu 22.04, x86_64)
 
-  > **(Linux) Ubuntu 24.04**
+  > **Ubuntu 24.04**
   > Ubuntu 24.04 is not fully supported at this time. Building with Ubuntu 24.04 requires GCC/G++ 11 to be installed, GCC/G++ 12+ is not supported.
 
 - **GPU**: For additional information on GPU features and requirements, see [NVIDIA GPU Requirements](https://docs.omniverse.nvidia.com/dev-guide/latest/common/technical-requirements.html)
@@ -69,17 +68,13 @@ Ensure your system is set up with the following before building Isaac Sim:
 
 - [**Git LFS**](https://git-lfs.com/): For managing large files within the repository
 
-- **(Windows - C++ Only) Microsoft Visual Studio (2019 or 2022)**: You can install the latest version from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/). Ensure that the **Desktop development with C++** workload is selected.  [Additional information on Windows development configuration](docs/readme/windows_developer_configuration.md)
-
-- **(Windows - C++ Only) Windows SDK**: Install this alongside MSVC. You can find it as part of the Visual Studio Installer. [Additional information on Windows development configuration](docs/readme/windows_developer_configuration.md)
-
-- **(Linux) build-essentials**: A package that includes `make` and other essential tools for building applications.  For Ubuntu, install with:
+- **build-essentials**: A package that includes `make` and other essential tools for building applications.  For Ubuntu, install with:
 
   ```bash
   sudo apt-get install build-essential
   ```
 
-  > **(Linux) ⚠️**
+  > **⚠️**
   > Please use GCC/G++ 11, higher versions are not supported yet. To install GCC/G++ 11, run the following commands:
   > ```bash
   > sudo apt-get install gcc-11 g++-11
@@ -88,13 +83,13 @@ Ensure your system is set up with the following before building Isaac Sim:
   > ```
 
   > **Compiler Version Check ⚠️**
-  > We have added a version checker to our build process. If you do not have the default versions you are still able to execute a build, add  `--skip-compiler-version-check` to `build.[sh/bat]` when building.  Proceed at your own risk, unsupported build environments may encounter build and runtime issues.
+  > We have added a version checker to our build process. If you do not have the default versions you are still able to execute a build, add  `--skip-compiler-version-check` to `build.sh` when building.  Proceed at your own risk, unsupported build environments may encounter build and runtime issues.
 
 ### Recommended Software
 
-- [**(Linux) Docker**](https://docs.docker.com/engine/install/ubuntu/): For containerized development and deployment. **Ensure non-root users have Docker permissions.**
+- [**Docker**](https://docs.docker.com/engine/install/ubuntu/): For containerized development and deployment. **Ensure non-root users have Docker permissions.**
 
-- [**(Linux) NVIDIA Container Toolkit**](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html): For GPU-accelerated containerized development and deployment. **Installation and Configuring Docker steps are required.**
+- [**NVIDIA Container Toolkit**](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html): For GPU-accelerated containerized development and deployment. **Installation and Configuring Docker steps are required.**
 
 - [**VSCode**](https://code.visualstudio.com/download) (or your preferred IDE): For code editing and development
 
@@ -106,7 +101,7 @@ This section guides you through building Isaac Sim from source code.
 
 
 ```bash
-git clone https://github.com/isaac-sim/IsaacSim.git isaacsim
+git clone https://github.com/Seooooooogi/IsaacSim_510.git isaacsim
 cd isaacsim
 git lfs install
 git lfs pull
@@ -115,8 +110,6 @@ git lfs pull
 ### 2. Build
 
 Run the following command to initiate the configuration wizard:
-
-**Linux:**
 
 Confirm that GCC/G++ 11 is being used before building using the following commands:
 
@@ -129,15 +122,6 @@ g++ --version
 ./build.sh
 ```
 
-**Windows:**
-
-> **⚠️ Windows Path Length Limitation**
-> Windows has a path length limitation of 260 characters. If you encounter errors related missing files or other build errors, try moving the repository to a shorter path.
-
-```powershell
-build.bat
-```
-
 ### 3. Run
 
 > **⚠️ Startup Time**
@@ -145,24 +129,11 @@ build.bat
 
 
 
-Navigate to the corresponding binary directory for your platform and run the executable.
+Navigate to the binary directory and run the executable.
 
-**Linux (x86_64):**
 ```bash
 cd _build/linux-x86_64/release
 ./isaac-sim.sh
-```
-
-**Linux (aarch64):**
-```bash
-cd _build/linux-aarch64/release
-./isaac-sim.sh
-```
-
-**Windows:**
-```powershell
-cd _build/windows-x86_64/release
-isaac-sim.bat
 ```
 
 > NOTE: If this is your first time building Isaac Sim, you will be prompted to accept the Omniverse Licensing Terms.
@@ -208,7 +179,7 @@ Congratulations on installing Isaac Sim! To get started with using Isaac Sim, fo
 
 - Please see the [FAQ](https://docs.isaacsim.omniverse.nvidia.com/latest/overview/faq_index.html), [Troubleshooting](https://docs.isaacsim.omniverse.nvidia.com/latest/overview/troubleshooting.html), and [Known Issues](https://docs.isaacsim.omniverse.nvidia.com/latest/overview/known_issues.html) for common questions, fixes, and workarounds.
 
-- On Linux, if you encounter network connectivity issues when building (such as corporate firewalls), run the following commands:
+- If you encounter network connectivity issues when building (such as corporate firewalls), run the following commands:
 
   ```bash
   export http_proxy="http://{Your IP address}:7890"
