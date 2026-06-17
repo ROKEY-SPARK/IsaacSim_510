@@ -101,7 +101,7 @@ This section guides you through building Isaac Sim from source code.
 
 
 ```bash
-git clone https://github.com/Seooooooogi/IsaacSim_510.git isaacsim
+git clone https://github.com/ROKEY-SPARK/IsaacSim_510.git isaacsim
 cd isaacsim
 git lfs install
 git lfs pull
